@@ -22,4 +22,4 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
-      #- run: cargo test # this will fail
+      - run: cargo test # this will fail
