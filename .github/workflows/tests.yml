@@ -1,0 +1,23 @@
+name: Tests
+on: [workflow_call]
+permissions: {}
+
+jobs:
+  test-matrix:
+    strategy:
+      matrix:
+        include:
+          - arch: x86_64
+            target_os: linux
+            runner: ubuntu-22.04
+          - arch: x86_64
+            target_os: windows
+            runner: windows-2022
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+
+  test-single-job:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
