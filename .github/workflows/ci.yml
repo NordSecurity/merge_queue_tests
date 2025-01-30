@@ -29,7 +29,6 @@ jobs:
     uses: ./.github/workflows/tests.yml
 
   check-all-green:
-    if: always()
     needs:
     - build
     - tests
