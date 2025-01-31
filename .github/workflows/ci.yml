@@ -1,6 +1,5 @@
 name: CI
 on:
-  push:
   pull_request:
   merge_group:
     types: [checks_requested]
@@ -8,27 +7,13 @@ on:
 permissions: {}
 
 jobs:
-  trigger:
-    if: |
-      github.event_name == 'push' ||
-      github.event_name == 'merge_group' ||
-      (
-        github.event_name == 'pull_request' &&
-        github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
-      )
-    runs-on: ubuntu-22.04
-    steps:
-      - name: CI Trigger
-        run: echo "Triggering CI"
-
   build:
-    needs: trigger
     uses: ./.github/workflows/build.yml
   tests:
-    needs: trigger
     uses: ./.github/workflows/tests.yml
 
   check-all-green:
+    if: always()
     needs:
     - build
     - tests
